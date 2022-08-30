@@ -1,0 +1,9 @@
+{
+  "short_name": "CV APP",
+  "name": "CV APPLICATION TOP",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
