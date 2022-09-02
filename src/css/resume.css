@@ -1,0 +1,47 @@
+.resume {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.resume form {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.display {
+  border: none;
+  pointer-events: none;
+}
+
+#info:hover,
+#workE:hover,
+#education:hover {
+  background-color: rgb(250, 247, 255);
+}
+
+#info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#info div {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#info .fName {
+}
+
+#info .lName {
+}
+
+#info .info {
+  text-align: end;
+}
