@@ -1,20 +1,28 @@
 import React from "react";
-import TextArea from "./TextArea";
+import "../css/item.css";
+import uniqid from "uniqid";
 class Item extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
+    let { company, location, years, title, description } =
+      this.props.information;
     return (
-      <div className="Item">
+      <div
+        className="item"
+        onClick={this.props.handleItemClick}
+        idkey={this.props.idkey}
+      >
         <div className="itemInfo">
-          <TextArea className="display" />
-          <TextArea className="display" />
-          <TextArea className="display" />
+          <h1>{company}</h1>
+          <h2>{location}</h2>
+          <h2>{years}</h2>
         </div>
+        <div className="point"></div>
         <div className="details">
-          <TextArea className="display" />
-          <TextArea className="display" />
+          <h1>{title}</h1>
+          <h2>{description}</h2>
         </div>
         <div className="action">
           <button className="delete">x</button>
