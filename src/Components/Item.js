@@ -11,7 +11,7 @@ class Item extends React.Component {
     return (
       <div
         className="item"
-        onClick={this.props.handleItemClick}
+        onClick={this.props.handleWorkExperienceItemClick}
         idkey={this.props.idkey}
       >
         <div className="itemInfo">

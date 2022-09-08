@@ -8,8 +8,25 @@ class Resume extends React.Component {
     this.state = {};
   }
   render() {
-    let { fName, lName, address, phoneNbr, email, wes } =
-      this.props.information;
+    let { fName, lName, address, phoneNbr, email } = this.props.headerInfo;
+    let workExpList = this.props.workExpList;
+
+    let newList = [];
+    if (workExpList.length !== 0) {
+      workExpList.forEach((item, index) => {
+        newList.push(
+          <Item
+            key={index}
+            idkey={index}
+            information={item}
+            handleWorkExperienceItemClick={
+              this.props.handleWorkExperienceItemClick
+            }
+          />
+        );
+      });
+    }
+
     return (
       <div className="resume">
         <form>
@@ -35,7 +52,7 @@ class Resume extends React.Component {
                 add
               </button>
             </header>
-            <div className="items">{wes}</div>
+            <div className="items">{newList}</div>
           </div>
 
           <div id="education" className="section">

@@ -5,22 +5,33 @@ class WeEditTab extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
-    let { company, location, years, title, description } =
-      this.props.information;
+    let workExpItemIndex = this.props.workExpItemIndex;
+    let workExpList = this.props.workExpList;
+    let information = workExpList[workExpItemIndex];
+    let { company, location, years, title, description } = information;
     return (
       <div className="editTab">
         <form onChange={this.props.handleItemInputChange}>
-          <label htmlFor="company">CXompany</label>
-          <input id="company" defaultValue={company} />
+          <label htmlFor="company">Company</label>
+          <input id="company" defaultValue={company} index={workExpItemIndex} />
           <label htmlFor="location">Location</label>
-          <input id="location" defaultValue={location} />
+          <input
+            id="location"
+            defaultValue={location}
+            index={workExpItemIndex}
+          />
           <label htmlFor="years">Years</label>
-          <input id="years" defaultValue={years} />
+          <input id="years" defaultValue={years} index={workExpItemIndex} />
           <label htmlFor="title">Title</label>
-          <input id="title" defaultValue={title} />
+          <input id="title" defaultValue={title} index={workExpItemIndex} />
           <label htmlFor="description">Description</label>
-          <input id="description" defaultValue={description} />
+          <input
+            id="description"
+            defaultValue={description}
+            index={workExpItemIndex}
+          />
         </form>
       </div>
     );

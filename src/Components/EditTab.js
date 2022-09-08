@@ -12,14 +12,15 @@ class EditTab extends React.Component {
       case "info":
         return (
           <InfoEditTab
-            handleInputChange={this.props.handleInputChange}
-            information={this.props.information}
+            handleHeaderInputChange={this.props.handleHeaderInputChange}
+            headerInfo={this.props.headerInfo}
           />
         );
       case "workExperienceItem":
         return (
           <WeEditTab
-            information={this.props.information}
+            workExpList={this.props.workExpList}
+            workExpItemIndex={this.props.workExpItemIndex}
             handleItemInputChange={this.props.handleItemInputChange}
           />
         );

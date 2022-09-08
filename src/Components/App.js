@@ -2,32 +2,31 @@ import React from "react";
 import "../css/app.css";
 import Resume from "./Resume";
 import EditTab from "./EditTab";
-import Item from "./Item";
-import uniqid from "uniqid";
+
+let itemInfo = {
+  company: "company",
+  location: "location",
+  years: "years",
+  title: "title",
+  description: "description",
+};
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       tabType: null,
-      fName: "First Name",
-      lName: "Last Name",
-      address: "651 rowing street , BC",
-      phoneNbr: "0216489486",
-      email: "abdou@gmail.com",
-
+      headerInfo: {
+        fName: "First Name",
+        lName: "Last Name",
+        address: "651 rowing street , BC",
+        phoneNbr: "0216489486",
+        email: "abdou@gmail.com",
+      },
       tabID: null,
-      idkey: 0,
-      company: "company",
-      location: "location",
-      years: "years",
-      title: "title",
-      description: "description",
-      wes: [],
-
-      es: [],
+      workExpList: [],
     };
     this.handleTab = this.handleTab.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleHeaderInputChange = this.handleHeaderInputChange.bind(this);
     this.handleAddWorkExperienceBtnClick =
       this.handleAddWorkExperienceBtnClick.bind(this);
     this.handleWorkExperienceItemClick =
@@ -35,86 +34,72 @@ class App extends React.Component {
     this.handleItemInputChange = this.handleItemInputChange.bind(this);
   }
   handleTab(event) {
-    this.setState({
-      tabType: event,
-    });
-  }
-  handleInputChange(event) {
-    const id = event.target.id;
-    this.setState({
-      [id]: event.target.value,
-    });
-  }
-  handleItemInputChange(event) {
-    this.handleInputChange(event);
-    let id = event.target.id;
-    let value = event.target.value;
     this.setState(
-      (prevState) => {
-        console.log(prevState);
-        let newState = Object.assign({}, prevState);
-        newState.wes[this.state.tabID].props.information[id] = value;
-        return { newState };
+      {
+        //unmount tab
+        tabType: null,
       },
       () => {
-        console.log(this.state.wes[this.state.tabID].props.information);
+        //mount tab
+        this.setState({ tabType: event });
       }
     );
+  }
+  handleHeaderInputChange(event) {
+    console.log(event.target);
+    let id = event.target.id;
+    let value = event.target.value;
+    let headerInfo = this.state.headerInfo;
+    this.setState({ headerInfo: { ...headerInfo, [id]: value } });
   }
 
   handleAddWorkExperienceBtnClick(event) {
     event.preventDefault();
-    this.setState(
-      {
-        tabType: null,
-        wes: this.state.wes.concat(
-          <Item
-            key={this.state.idkey}
-            idkey={this.state.idkey}
-            handleItemClick={this.handleWorkExperienceItemClick}
-            information={this.state}
-          />
-        ),
-      },
-      () => {
-        this.setState({ idkey: this.state.idkey + 1 });
-      }
-    );
+    this.setState({
+      tabType: null,
+      workExpList: this.state.workExpList.concat(itemInfo),
+    });
   }
+
   handleWorkExperienceItemClick(event) {
-    this.render();
-    this.handleTab("workExperienceItem");
+    console.log(event.currentTarget);
     this.setState(
       {
         tabID: event.currentTarget.getAttribute("idkey"),
       },
       () => {
-        let { building, location, years, title, description } =
-          this.state.wes[this.state.tabID].props.information;
-        this.setState({
-          building: building,
-          location: location,
-          years: years,
-          title: title,
-          description: description,
-        });
+        this.handleTab("workExperienceItem");
       }
     );
-    console.log(this.state.wes);
+  }
+  handleItemInputChange(event) {
+    let id = event.target.id;
+    let value = event.target.value;
+    let itemIndex = parseInt(event.target.getAttribute("index"));
+    console.log(event.target);
+    this.setState((prevState) => ({
+      workExpList: prevState.workExpList.map((item, index) =>
+        index === itemIndex ? (item = { ...item, [id]: value }) : item
+      ),
+    }));
   }
   render() {
     return (
       <div className="App">
         <Resume
           tabType={this.handleTab}
-          information={this.state}
+          headerInfo={this.state.headerInfo}
+          workExpList={this.state.workExpList}
           handleAddWorkExperienceBtnClick={this.handleAddWorkExperienceBtnClick}
+          handleWorkExperienceItemClick={this.handleWorkExperienceItemClick}
         />
         <EditTab
           tabType={this.state.tabType}
-          handleInputChange={this.handleInputChange}
+          handleHeaderInputChange={this.handleHeaderInputChange}
           handleItemInputChange={this.handleItemInputChange}
-          information={this.state}
+          headerInfo={this.state.headerInfo}
+          workExpList={this.state.workExpList}
+          workExpItemIndex={this.state.tabID}
         />
       </div>
     );

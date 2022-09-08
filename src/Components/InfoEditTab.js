@@ -6,10 +6,10 @@ class InfoEditTab extends React.Component {
     super(props);
   }
   render() {
-    let { fName, lName, address, phoneNbr, email } = this.props.information;
+    let { fName, lName, address, phoneNbr, email } = this.props.headerInfo;
     return (
       <div className="editTab">
-        <form onChange={this.props.handleInputChange}>
+        <form onChange={this.props.handleHeaderInputChange}>
           <label htmlFor="fName">First Name</label>
           <input id="fName" defaultValue={fName} />
           <label htmlFor="lName">Last Name</label>
