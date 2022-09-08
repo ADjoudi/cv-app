@@ -22,6 +22,7 @@ class Resume extends React.Component {
             handleWorkExperienceItemClick={
               this.props.handleWorkExperienceItemClick
             }
+            deleteBtnClick={this.props.deleteBtnClick}
           />
         );
       });

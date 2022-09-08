@@ -32,6 +32,7 @@ class App extends React.Component {
     this.handleWorkExperienceItemClick =
       this.handleWorkExperienceItemClick.bind(this);
     this.handleItemInputChange = this.handleItemInputChange.bind(this);
+    this.deleteBtnClick = this.deleteBtnClick.bind(this);
   }
   handleTab(event) {
     this.setState(
@@ -46,7 +47,6 @@ class App extends React.Component {
     );
   }
   handleHeaderInputChange(event) {
-    console.log(event.target);
     let id = event.target.id;
     let value = event.target.value;
     let headerInfo = this.state.headerInfo;
@@ -62,7 +62,6 @@ class App extends React.Component {
   }
 
   handleWorkExperienceItemClick(event) {
-    console.log(event.currentTarget);
     this.setState(
       {
         tabID: event.currentTarget.getAttribute("idkey"),
@@ -76,10 +75,18 @@ class App extends React.Component {
     let id = event.target.id;
     let value = event.target.value;
     let itemIndex = parseInt(event.target.getAttribute("index"));
-    console.log(event.target);
     this.setState((prevState) => ({
       workExpList: prevState.workExpList.map((item, index) =>
         index === itemIndex ? (item = { ...item, [id]: value }) : item
+      ),
+    }));
+  }
+  deleteBtnClick(event) {
+    event.preventDefault();
+    let itemIndex = parseInt(event.target.getAttribute("idkey"));
+    this.setState((prevState) => ({
+      workExpList: prevState.workExpList.map((item, index) =>
+        index === itemIndex ? (item = null) : item
       ),
     }));
   }
@@ -92,6 +99,7 @@ class App extends React.Component {
           workExpList={this.state.workExpList}
           handleAddWorkExperienceBtnClick={this.handleAddWorkExperienceBtnClick}
           handleWorkExperienceItemClick={this.handleWorkExperienceItemClick}
+          deleteBtnClick={this.deleteBtnClick}
         />
         <EditTab
           tabType={this.state.tabType}
