@@ -1,5 +1,7 @@
 .resume {
   flex: 1;
+  flex-shrink: 0;
+  min-width: 32rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -9,6 +11,9 @@
   padding-top: 10vw;
 }
 .resume form {
+  flex-shrink: 0;
+  min-width: 600px;
+  overflow: auto;
   background-color: white;
   display: flex;
   flex-direction: column;
