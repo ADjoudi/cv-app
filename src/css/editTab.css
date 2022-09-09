@@ -13,7 +13,7 @@
 
 .editTab input {
   padding: 1rem 1.2rem;
-  color: rgb(166, 116, 0);
+  color: #a67400;
   background-color: var(--body--color);
   border-radius: 0.8rem;
   border: none;
